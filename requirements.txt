@@ -1,0 +1,21 @@
+# Data manipulation
+numpy
+pandas
+polars
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+
+# Visualization
+matplotlib
+seaborn
+
+# Notebooks
+jupyter
+ipykernel
+
+# Utilities
+tqdm
+joblib
