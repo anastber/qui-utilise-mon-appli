@@ -72,10 +72,19 @@ Validation croisée stratifiée à **4 plis** (la classe la plus rare n'a que 4 
 
 LightGBM n'a pas pu être retenu : avec 247 classes de ~10 exemples, il demande des réglages très prudents (69 % sur une version antérieure des features, contre 83 % pour un Random Forest sur les mêmes colonnes), et il ne se charge pas dans notre environnement (`libomp` manquant).
 
-## 5. Limites et suite
+## 5. Résultat Kaggle et analyse des erreurs
+
+**Score Kaggle de la première soumission (ExtraTrees) : 0,925**, pour 0,932 de F1 macro en validation croisée. L'écart (0,007) est de l'ordre du bruit (324 sessions de test) : la validation croisée est un guide fiable pour choisir les modèles.
+
+Analyse des 225 erreurs hors-pli sur 3276 sessions (6,9 %) :
+- **La longueur de la session est le facteur dominant** : 16,6 % d'erreurs pour les sessions de 131 actions ou moins, contre 1,8 % pour les plus longues. Le quintile le plus court porte 48 % des erreurs : peu d'actions, peu de signal.
+- **Les erreurs sont concentrées** : 150 utilisateurs sur 247 n'ont aucune erreur ; les 20 plus touchés portent 52 % des erreurs. Le cas le plus marqué est `flj` (29 erreurs sur 42 sessions), confondu surtout avec `skm` (17 fois) et `slq` (8 fois) : trois utilisateurs Chrome qui ont des sessions courtes (médiane ≈ 120 à 150 actions) et des habitudes proches.
+- **La taille de classe joue modérément** : 13,5 % d'erreurs pour les classes de 4 à 5 sessions, contre 5,4 % pour celles de 13 à 20.
+- **Le navigateur est déjà exploité par le modèle** : aucune des 225 erreurs ne prédit un utilisateur d'un autre navigateur. Une contrainte « même navigateur » ne corrigerait donc rien.
+
+## 6. Limites et suite
 
 - Les scores viennent d'**un seul tirage de plis** : des écarts de ~0,01 ne sont pas fiables. À répéter pour départager ExtraTrees et Random Forest.
-- Le score est probablement **un peu optimiste** : les sessions d'un même utilisateur se retrouvent des deux côtés du découpage (comme entre train et test). Le score Kaggle fera foi.
 - **Pas encore fait** :
   - correction de la durée (la dernière fenêtre `tXX` n'est jamais fermée, donc la durée est légèrement sous-estimée ; impact faible) ;
   - ordre des actions (n-grammes, transitions) ;
