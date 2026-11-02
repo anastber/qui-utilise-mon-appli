@@ -1,6 +1,6 @@
 # La TF-IDF et le SVM linéaire, appliqués à notre problème
 
-Ce document suit **une vraie session** du train, de la ligne du CSV jusqu'à la prédiction, avec les chiffres réellement calculés par le code de `BE_CS1_tfidf_svm.ipynb`.
+Ce document suit **une vraie session** du train, de la ligne du CSV jusqu'à la prédiction, avec les chiffres réellement calculés par le code de `3_tfidf_modeles.ipynb`.
 
 ```
 ligne du CSV ──► liste de jetons ──► vecteur TF-IDF (46 666 colonnes) ──► 247 scores (SVM) ──► contrainte navigateur ──► utilisateur prédit
