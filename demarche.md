@@ -53,16 +53,16 @@ Validation croisée stratifiée à 4 plis (la classe la plus rare n'a que 4 sess
 
 | Modèle | F1 macro | F1 macro + contrainte navigateur |
 |---|---|---|
-| ExtraTrees (3000 meilleurs jetons, χ²) | à remplir | à remplir |
-| SVM linéaire libsvm (`SVC(kernel="linear")`, C=3, un contre un) | à remplir | à remplir |
-| LinearSVC C=1 | 0,943 | à remplir |
+| ExtraTrees (3000 meilleurs jetons, χ²) | 0,884 | 0,918 |
+| SVM linéaire libsvm (`SVC(kernel="linear")`, C=3, un contre un) | 0,932 | 0,950 |
+| LinearSVC C=1 | 0,943 | 0,963 |
 | **LinearSVC C=3** | **0,949** | **0,967** (soumission Kaggle : **0,988**) |
-| LinearSVC C=10 | 0,950 | à remplir |
-| LinearSVC C=30 | à remplir | à remplir |
+| LinearSVC C=10 | 0,950 | 0,967 |
+| LinearSVC C=30 | 0,951 | 0,968 |
 
-Choix des jetons (LinearSVC, C=3) : actions + bigrammes, + trigrammes, vues multiples (retenue), vues multiples + trigrammes : à remplir.
+Choix des jetons (LinearSVC C=3, F1 macro sans / avec contrainte) : actions + bigrammes 0,946 / 0,965 ; + trigrammes 0,938 / 0,962 ; **vues multiples (retenue) 0,949 / 0,967** ; vues multiples + trigrammes 0,946 / 0,965.
 
-**Contrainte « même navigateur »** : on prédit le meilleur utilisateur parmi ceux qui utilisent le navigateur de la session. Le SVM ne voit le navigateur que comme un jeton parmi des milliers : sans la contrainte, une partie de ses erreurs prédit un utilisateur d'un autre navigateur (66 évitées pour LinearSVC C=3).
+**Contrainte « même navigateur »** : on prédit le meilleur utilisateur parmi ceux qui utilisent le navigateur de la session. Le SVM ne voit le navigateur que comme un jeton parmi des milliers : pour LinearSVC C=3, 66 de ses 132 erreurs prédisent un utilisateur d'un autre navigateur ; avec la contrainte, il reste 90 erreurs. Elle aide tous les modèles, l'ExtraTrees le plus (+0,034 de F1).
 
 ### 4.3 Pourquoi ce classement
 

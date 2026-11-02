@@ -156,7 +156,7 @@ Les jetons qui ont les plus gros poids positifs pour `slq` (ce que le modèle co
 
 Le SVM ne voit le navigateur que comme **un jeton parmi des milliers** (`NAV=Google Chrome`). Il lui arrive donc de prédire un utilisateur d'un autre navigateur : environ la moitié de ses erreurs en validation croisée. Or, sur le train, chaque utilisateur n'utilise **qu'un seul** navigateur.
 
-On ajoute donc une règle après le SVM : on ne garde que les scores des utilisateurs du **même navigateur** que la session, puis on prend le maximum. Dans notre exemple, les 5 meilleurs sont déjà tous sur Chrome : la règle ne change rien. Sur l'ensemble du train, elle évite 66 erreurs et fait passer le F1 macro de 0,949 à 0,967. Sur le test, elle a modifié 5 prédictions sur 324.
+On ajoute donc une règle après le SVM : on ne garde que les scores des utilisateurs du **même navigateur** que la session, puis on prend le maximum. Dans notre exemple, les 5 meilleurs sont déjà tous sur Chrome : la règle ne change rien. Sur l'ensemble du train, 66 des 132 erreurs prédisaient un utilisateur d'un autre navigateur ; la règle ramène les erreurs à 90 et fait passer le F1 macro de 0,949 à 0,967. Sur le test, elle a modifié 5 prédictions sur 324.
 
 ## 7. Pourquoi il n'y a pas de fuite d'information
 
