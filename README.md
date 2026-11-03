@@ -38,7 +38,7 @@ Les notebooks se lisent dans l'ordre :
 |---|---|
 | `0_consignes.ipynb` | consignes du projet |
 | `1_exploration.ipynb` | chargement, première analyse des données, valeurs aberrantes |
-| `2_features_manuelles_modeles.ipynb` | approche 1 : 143 features construites à la main, un modèle par cellule, comparaison, soumission |
+| `2_features_manuelles_modeles.ipynb` | approche 1 : 756 features construites à la main, un modèle par cellule, comparaison, soumission |
 | `3_tfidf_modeles.ipynb` | approche 2 (finale) : sessions représentées en TF-IDF, choix des jetons, modèles testés, contrainte navigateur, soumission |
 
 Dans les notebooks 2 et 3, la dernière cellule génère une soumission dans `submissions/` pour le modèle choisi (variable `MODELE_SOUMISSION`).
