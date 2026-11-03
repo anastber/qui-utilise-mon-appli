@@ -2,7 +2,7 @@
 
 Objectif : identifier l'utilisateur de Copilote (247 trigrammes) à partir de la trace d'une session. Métrique du challenge : F1 moyen (on suit le F1 macro, plus l'accuracy).
 
-**Résultat final : TF-IDF + SVM linéaire + contrainte « même navigateur », 0,988 sur Kaggle** avec `C=3` (0,925 pour notre première soumission ExtraTrees). Soumission finale : `C=30`, le meilleur en validation croisée (écart non significatif avec `C=3`). Notebooks : `2_features_manuelles_modeles.ipynb` (approche 1) et `3_tfidf_modeles.ipynb` (approche 2, finale).
+**Résultat final : TF-IDF + SVM linéaire + contrainte « même navigateur », 0,988 sur Kaggle** (0,925 pour notre première soumission ExtraTrees). Soumission finale : `C=30`, le meilleur en validation croisée ; `C=3` obtient exactement le même score sur Kaggle. Notebooks : `2_features_manuelles_modeles.ipynb` (approche 1) et `3_tfidf_modeles.ipynb` (approche 2, finale).
 
 ## 1. Ce que contiennent les données
 
@@ -11,7 +11,7 @@ Une action a la forme `Type(écran)<configuration>$chaîne$`, avec un `1` final 
 
 - **Classes déséquilibrées** : 13 sessions par utilisateur en moyenne (de 4 à 75). Toujours prédire le plus fréquent donne 2,3 % d'accuracy. D'où le F1 macro, où chaque utilisateur compte autant.
 - **Longueurs très asymétriques** (médiane 340 actions, maximum 11 977). Durée et nombre d'actions sont redondants (≈ 0,9 action/s).
-- **Chaque utilisateur n'a qu'un navigateur** (vérifié sur tout le train). Opera = un seul utilisateur.
+- **Chaque utilisateur n'a qu'un navigateur** (vrai pour les 247 du train) : 114 utilisateurs sur Firefox, 93 sur Chrome, 39 sur Edge, 1 seul sur Opera.
 
 ## 2. Valeurs aberrantes
 
@@ -82,7 +82,7 @@ Choix des jetons (LinearSVC C=3, F1 macro sans / avec contrainte) : actions + bi
 - **Le SVM linéaire est fait pour ce type de données** : des dizaines de milliers de colonnes creuses pour ~3300 sessions, où les classes sont presque séparables par un hyperplan.
 - **Un contre tous plutôt qu'un contre un** : `LinearSVC` entraîne un classifieur par utilisateur sur toutes les sessions ; `SVC(kernel="linear")` en entraîne un par paire d'utilisateurs (30 381), chacun sur ~26 sessions seulement, et ses scores par utilisateur, reconstruits à partir de votes, se prêtent moins bien à la contrainte navigateur.
 - **Les arbres se perdent dans les colonnes creuses** de la TF-IDF, mais restent le meilleur choix sur les features manuelles.
-- **Le boosting sur-apprend** avec ~13 sessions par classe (un arbre par classe et par itération), et il est beaucoup plus lent.
+- **Le boosting est en retrait** sur les features manuelles, et il est beaucoup plus lent (un arbre par classe et par itération).
 
 ## 5. Résultats Kaggle et analyse des erreurs
 
@@ -90,9 +90,9 @@ Choix des jetons (LinearSVC C=3, F1 macro sans / avec contrainte) : actions + bi
 |---|---|---|
 | ExtraTrees, première version des features manuelles (non conservée) | – | 0,925 |
 | LinearSVC C=3 + contrainte navigateur, TF-IDF | 0,967 | **0,988** |
-| LinearSVC C=30 + contrainte navigateur, TF-IDF (finale) | 0,968 | à soumettre |
+| LinearSVC C=30 + contrainte navigateur, TF-IDF (finale) | 0,968 | **0,988** |
 
-Le score Kaggle du SVM (`C=3`) dépasse sa validation croisée. Explication probable (non vérifiée) : en validation, le modèle n'apprend que sur 3/4 des sessions de chaque utilisateur (≈ 10 au lieu de 13), un vrai handicap pour les petites classes ; le modèle soumis est entraîné sur tout le train.
+Le score Kaggle du SVM dépasse sa validation croisée. Explication probable (non vérifiée) : en validation, le modèle n'apprend que sur 3/4 des sessions de chaque utilisateur (≈ 10 au lieu de 13), un vrai handicap pour les petites classes ; le modèle soumis est entraîné sur tout le train.
 
 Erreurs selon la longueur de la session (prédictions hors-pli) :
 
