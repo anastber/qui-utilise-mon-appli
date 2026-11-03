@@ -97,7 +97,7 @@ Jetons les plus fréquents dans la session :
 
 **C'est tout l'intérêt de la TF-IDF** : « Exécution d'un bouton » apparaît 14 fois, mais pèse **deux fois moins** que l'écran `FicheRefForm` vu **une seule fois**. Tout le monde clique sur des boutons ; très peu de gens passent par cet écran. D'ailleurs, sur tout le train, l'écran `FicheRefForm` n'est utilisé que par **3 utilisateurs** : `flj`, `slq` et `wjn`. Ce seul jeton réduit déjà les candidats de 247 à 3.
 
-Avec nos anciennes features (top-50 des écrans par nombre total d'occurrences), cet écran rare n'existait pas : l'information était perdue.
+Dans nos features manuelles, cet écran n'est qu'une colonne parmi 756, nulle dans presque toutes les sessions, que l'ExtraTrees traite comme les autres. Ici, l'IDF le met en avant.
 
 ## 5. Étape 4 : le SVM linéaire
 
@@ -156,7 +156,7 @@ Les jetons qui ont les plus gros poids positifs pour `slq` (ce que le modèle co
 
 Le SVM ne voit le navigateur que comme **un jeton parmi des milliers** (`NAV=Google Chrome`). Il lui arrive donc de prédire un utilisateur d'un autre navigateur : environ la moitié de ses erreurs en validation croisée. Or, sur le train, chaque utilisateur n'utilise **qu'un seul** navigateur.
 
-On ajoute donc une règle après le SVM : on ne garde que les scores des utilisateurs du **même navigateur** que la session, puis on prend le maximum. Dans notre exemple, les 5 meilleurs sont déjà tous sur Chrome : la règle ne change rien. Sur l'ensemble du train, 66 des 132 erreurs prédisaient un utilisateur d'un autre navigateur ; la règle ramène les erreurs à 90 et fait passer le F1 macro de 0,949 à 0,967. Sur le test, elle a modifié 5 prédictions sur 324.
+On ajoute donc une règle après le SVM : on ne garde que les scores des utilisateurs du **même navigateur** que la session, puis on prend le maximum. Dans notre exemple, les 5 meilleurs sont déjà tous sur Chrome : la règle ne change rien. Sur l'ensemble du train, 66 des 132 erreurs prédisaient un utilisateur d'un autre navigateur ; la règle ramène les erreurs à 92 et fait passer le F1 macro de 0,949 à 0,967. Sur le test, elle a modifié 5 prédictions sur 324.
 
 ## 7. Pourquoi il n'y a pas de fuite d'information
 
@@ -168,11 +168,11 @@ On ajoute donc une règle après le SVM : on ne garde que les scores des utilisa
 
 | | Features manuelles + ExtraTrees | TF-IDF + SVM linéaire |
 |---|---|---|
-| Vocabulaire | top-K : 50 écrans, 20 configurations, 30 chaînes | 46 666 jetons, dont tous les écrans rares |
+| Vocabulaire | 418 écrans, 219 configurations, 76 chaînes, chacun en colonne séparée | 46 666 jetons, dont tous les écrans rares |
 | Combinaisons | chaque famille comptée séparément | l'action complète combine type, écran, configuration, chaîne |
 | Enchaînements | aucun | bigrammes d'actions et de types |
-| Jetons rares | perdus, ou noyés parmi des centaines de colonnes | mis en avant par l'IDF |
-| F1 macro (validation croisée) | 0,941 | 0,967 (avec la contrainte) |
+| Jetons rares | présents, mais une colonne comme une autre | mis en avant par l'IDF |
+| F1 macro (validation croisée) | 0,942 | 0,967 (avec la contrainte) |
 | Kaggle | 0,925 | **0,988** |
 
 Le modèle est également **simple** : un poids par jeton et par utilisateur, et un score qui est une somme. On peut donc expliquer chaque décision, comme on l'a fait pour cette session.
