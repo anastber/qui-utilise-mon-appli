@@ -11,7 +11,7 @@ Une action a la forme `Type(écran)<configuration>$chaîne$`, avec un `1` final 
 
 - **Classes déséquilibrées** : 13 sessions par utilisateur en moyenne (de 4 à 75). Toujours prédire le plus fréquent donne 2,3 % d'accuracy. D'où le F1 macro, où chaque utilisateur compte autant.
 - **Longueurs très asymétriques** (médiane 340 actions, maximum 11 977). Durée et nombre d'actions sont redondants (≈ 0,9 action/s).
-- **Chaque utilisateur n'a qu'un navigateur** (vérifié sur tout le train). Opera = un seul utilisateur.
+- **Chaque utilisateur n'a qu'un navigateur** (vrai pour les 247 du train) : 114 utilisateurs sur Firefox, 93 sur Chrome, 39 sur Edge, 1 seul sur Opera.
 
 ## 2. Valeurs aberrantes
 
