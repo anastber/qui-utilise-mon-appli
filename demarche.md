@@ -82,7 +82,7 @@ Choix des jetons (LinearSVC C=3, F1 macro sans / avec contrainte) : actions + bi
 - **Le SVM linéaire est fait pour ce type de données** : des dizaines de milliers de colonnes creuses pour ~3300 sessions, où les classes sont presque séparables par un hyperplan.
 - **Un contre tous plutôt qu'un contre un** : `LinearSVC` entraîne un classifieur par utilisateur sur toutes les sessions ; `SVC(kernel="linear")` en entraîne un par paire d'utilisateurs (30 381), chacun sur ~26 sessions seulement, et ses scores par utilisateur, reconstruits à partir de votes, se prêtent moins bien à la contrainte navigateur.
 - **Les arbres se perdent dans les colonnes creuses** de la TF-IDF, mais restent le meilleur choix sur les features manuelles.
-- **Le boosting sur-apprend** avec ~13 sessions par classe (un arbre par classe et par itération), et il est beaucoup plus lent.
+- **Le boosting est en retrait** sur les features manuelles, et il est beaucoup plus lent (un arbre par classe et par itération).
 
 ## 5. Résultats Kaggle et analyse des erreurs
 
