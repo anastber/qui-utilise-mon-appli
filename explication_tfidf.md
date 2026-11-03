@@ -173,6 +173,6 @@ On ajoute donc une règle après le SVM : on ne garde que les scores des utilisa
 | Enchaînements | aucun | bigrammes d'actions et de types |
 | Jetons rares | présents, mais une colonne comme une autre | mis en avant par l'IDF |
 | F1 macro (validation croisée) | 0,942 | 0,967 (avec la contrainte) |
-| Kaggle | 0,925 | **0,988** |
+| Kaggle | 0,944 | **0,988** |
 
 Le modèle est également **simple** : un poids par jeton et par utilisateur, et un score qui est une somme. On peut donc expliquer chaque décision, comme on l'a fait pour cette session.
