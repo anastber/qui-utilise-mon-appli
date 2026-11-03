@@ -2,7 +2,7 @@
 
 Objectif : identifier l'utilisateur de Copilote (247 trigrammes) à partir de la trace d'une session. Métrique du challenge : F1 moyen (on suit le F1 macro, plus l'accuracy).
 
-**Résultat final : TF-IDF + SVM linéaire + contrainte « même navigateur », 0,988 sur Kaggle** avec `C=3` (0,925 pour notre première soumission ExtraTrees). Soumission finale : `C=30`, le meilleur en validation croisée (écart non significatif avec `C=3`). Notebooks : `2_features_manuelles_modeles.ipynb` (approche 1) et `3_tfidf_modeles.ipynb` (approche 2, finale).
+**Résultat final : TF-IDF + SVM linéaire + contrainte « même navigateur », 0,988 sur Kaggle** (0,925 pour notre première soumission ExtraTrees). Soumission finale : `C=30`, le meilleur en validation croisée ; `C=3` obtient exactement le même score sur Kaggle. Notebooks : `2_features_manuelles_modeles.ipynb` (approche 1) et `3_tfidf_modeles.ipynb` (approche 2, finale).
 
 ## 1. Ce que contiennent les données
 
@@ -90,9 +90,9 @@ Choix des jetons (LinearSVC C=3, F1 macro sans / avec contrainte) : actions + bi
 |---|---|---|
 | ExtraTrees, première version des features manuelles (non conservée) | – | 0,925 |
 | LinearSVC C=3 + contrainte navigateur, TF-IDF | 0,967 | **0,988** |
-| LinearSVC C=30 + contrainte navigateur, TF-IDF (finale) | 0,968 | à soumettre |
+| LinearSVC C=30 + contrainte navigateur, TF-IDF (finale) | 0,968 | **0,988** |
 
-Le score Kaggle du SVM (`C=3`) dépasse sa validation croisée. Explication probable (non vérifiée) : en validation, le modèle n'apprend que sur 3/4 des sessions de chaque utilisateur (≈ 10 au lieu de 13), un vrai handicap pour les petites classes ; le modèle soumis est entraîné sur tout le train.
+Le score Kaggle du SVM dépasse sa validation croisée. Explication probable (non vérifiée) : en validation, le modèle n'apprend que sur 3/4 des sessions de chaque utilisateur (≈ 10 au lieu de 13), un vrai handicap pour les petites classes ; le modèle soumis est entraîné sur tout le train.
 
 Erreurs selon la longueur de la session (prédictions hors-pli) :
 
