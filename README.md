@@ -54,7 +54,6 @@ Ce qu'ils produisent :
 - `images/` : les figures reprises dans le rapport ;
 - `submissions/` : un fichier de soumission Kaggle. Dans les notebooks 2 et 3, la dernière cellule entraîne sur tout le train le modèle choisi (variable `MODELE_SOUMISSION`) et écrit ses prédictions. La soumission finale est `submissions/tfidf_linearsvc_c_30_navigateur.csv`.
 
-## Documents
+## Document
 
-- `demarche.md` : synthèse de la démarche et de tous les résultats.
-- `explication_tfidf.md` : la TF-IDF et le SVM linéaire, suivis pas à pas sur une vraie session.
+`demarche.md` : synthèse de la démarche et de tous les résultats.
