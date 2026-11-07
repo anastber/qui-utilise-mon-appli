@@ -1,21 +1,11 @@
-# Data manipulation
-numpy
-pandas
-polars
-
-# Machine Learning
-scikit-learn
-xgboost
-lightgbm
-
-# Visualization
-matplotlib
-seaborn
+# Python 3.14
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+xgboost==3.4.1
+lightgbm==4.7.0
+matplotlib==3.11.2
 
 # Notebooks
-jupyter
-ipykernel
-
-# Utilities
-tqdm
-joblib
+jupyter==1.1.1
+ipykernel==7.4.0
