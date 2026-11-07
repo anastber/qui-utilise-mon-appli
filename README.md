@@ -1,48 +1,60 @@
 # Qui utilise mon appli ?
 
-## Instructions pour le venv
+Identifier l'utilisateur de Copilote (247 utilisateurs) à partir de la trace d'une session. Challenge Kaggle du cours MOD 7.2, évalué au F1 macro.
 
-### 1. Créer le virtual environment
+**Solution finale : TF-IDF + SVM linéaire (`LinearSVC`) + contrainte « même navigateur », 0,988 sur Kaggle.**
+
+## Installation
+
+Python 3.14 est requis.
+
+Avec [uv](https://docs.astral.sh/uv/) :
 
 ```bash
 uv venv
-```
-
-### 2. Activer le venv
-
-Sur macOS / Linux :
-
-```bash
-source .venv/bin/activate
-```
-
-### 3. Installer les dépendances
-
-```bash
+source .venv/bin/activate        # Windows : .venv\Scripts\activate
 uv pip install -r requirements.txt
 ```
 
-### 4. Vérifier l'installation
+Ou avec pip :
 
 ```bash
-python --version
+python -m venv .venv
+source .venv/bin/activate        # Windows : .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-Le projet est maintenant prêt à être utilisé.
+## Données
 
-## Organisation du projet
+Les données ne sont pas versionnées. Les télécharger depuis l'onglet *Data* de la page Kaggle de la compétition, et les placer ainsi :
 
-Les notebooks se lisent dans l'ordre :
+```
+data/
+├── train.csv
+└── test.csv
+```
 
-| Notebook | Contenu |
-|---|---|
-| `0_consignes.ipynb` | consignes du projet |
-| `1_exploration.ipynb` | chargement, première analyse des données, valeurs aberrantes |
-| `2_features_manuelles_modeles.ipynb` | approche 1 : 756 features construites à la main, un modèle par cellule, comparaison, soumission |
-| `3_tfidf_modeles.ipynb` | approche 2 (finale) : sessions représentées en TF-IDF, choix des jetons, modèles testés, contrainte navigateur, soumission |
+## Lancer les notebooks
 
-Dans les notebooks 2 et 3, la dernière cellule génère une soumission dans `submissions/` pour le modèle choisi (variable `MODELE_SOUMISSION`).
+```bash
+jupyter lab
+```
+
+Les notebooks se lisent et s'exécutent dans l'ordre :
+
+| Notebook | Contenu | Durée |
+|---|---|---|
+| `0_consignes.ipynb` | consignes du projet | -- |
+| `1_exploration.ipynb` | chargement, exploration des données, valeurs extrêmes | < 1 min |
+| `2_features_manuelles_modeles.ipynb` | approche 1 : 756 variables construites à la main, un modèle par cellule, comparaison, soumission | ~ 10 min |
+| `3_tfidf_modeles.ipynb` | approche 2 (finale) : sessions représentées en TF-IDF, choix des jetons, modèles testés, contrainte navigateur, soumission | ~ 10 min |
+
+Ce qu'ils produisent :
+
+- `images/` : les figures reprises dans le rapport ;
+- `submissions/` : un fichier de soumission Kaggle. Dans les notebooks 2 et 3, la dernière cellule entraîne sur tout le train le modèle choisi (variable `MODELE_SOUMISSION`) et écrit ses prédictions. La soumission finale est `submissions/tfidf_linearsvc_c_30_navigateur.csv`.
+
+## Documents
 
 - `demarche.md` : synthèse de la démarche et de tous les résultats.
-- `explication_tfidf.md` : la TF-IDF et le SVM linéaire, suivis sur une vraie session.
-- Les données (`data/train.csv`, `data/test.csv`) ne sont pas versionnées.
+- `explication_tfidf.md` : la TF-IDF et le SVM linéaire, suivis pas à pas sur une vraie session.
