@@ -62,6 +62,6 @@ Ce qu'ils produisent :
 
 ## Contributeurs
 
-- [anastber](https://github.com/anastber)
-- [AYR12](https://github.com/AYR12)
-- [yangerr2](https://github.com/yangerr2)
+- Anas Tber ([anastber](https://github.com/anastber)) : anas.tber@etu.ec-lyon.fr
+- Ayman Rachidi ([AYR12](https://github.com/AYR12)) : ayman.rachidi@etu.ec-lyon.fr
+- Yannick Xu ([yangerr2](https://github.com/yangerr2)) : yannick.xu@etu.ec-lyon.fr
