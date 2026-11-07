@@ -1,6 +1,8 @@
 # Qui utilise mon appli ?
 
-Identifier l'utilisateur de Copilote (247 utilisateurs) à partir de la trace d'une session. Challenge Kaggle du cours MOD 7.2, évalué au F1 macro.
+Projet réalisé dans le cadre du cours MOD 7.2 (Introduction à la science des données) de l'École Centrale de Lyon, encadré par Julien Velcin et Antoine Becquet.
+
+Identifier l'utilisateur de Copilote (247 utilisateurs) à partir de la trace d'une session. Challenge Kaggle évalué au F1 macro.
 
 **Solution finale : TF-IDF + SVM linéaire (`LinearSVC`) + contrainte « même navigateur », 0,988 sur Kaggle.**
 
@@ -57,3 +59,9 @@ Ce qu'ils produisent :
 ## Document
 
 `demarche.md` : synthèse de la démarche et de tous les résultats.
+
+## Contributeurs
+
+- [anastber](https://github.com/anastber)
+- [AYR12](https://github.com/AYR12)
+- [yangerr2](https://github.com/yangerr2)
